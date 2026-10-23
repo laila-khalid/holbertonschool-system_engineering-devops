@@ -1,0 +1,72 @@
+# Task 0 - Simple Web Stack
+
+## Infrastructure Diagram
+
+```
+  [ User Browser ]
+         │
+         │ (Input: [www.foobar.com](https://www.foobar.com))
+         ▼
+[ DNS Lookup System ]
+         │ (Finds domain -> Sends back IP 8.8.8.8)
+         ▼
+    [ Internet ]
+         │
+         ▼
+┌────────────────────────────────────────────────────────┐
+│               WEB SERVER NODE (IP: 8.8.8.8)            │
+│                                                        │
+│  [ Nginx Traffic Handler ]                             │
+│            │                                           │
+│            │ (Routes Dynamic Requests)                 │
+│            ▼                                           │
+│  [ Backend App Engine ] ──> Uses ──> [ Project Code ]  │
+│            │                                           │
+│            │ (Sends Database Queries)                  │
+│            ▼                                           │
+│  [ MySQL Data Storage ]                                │
+└────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Specifics
+
+### What is a server?
+
+A server is a central computer that stores website data and shares it with other computers (clients) over the network. It stays online 24/7 to answer user requests.
+
+### What is the role of the domain name?
+
+A domain name is a friendly name for a website (like foobar.com). It helps users find a site easily without remembering long numbers like 8.8.8.8.
+
+### What type of DNS record is "www" in www.foobar.com?
+
+It is configured as an A record. This record links the name www.foobar.com directly to the server's real internet address, 8.8.8.8.
+
+### What is the role of the web server (Nginx)?
+
+Nginx is the first point of contact on the server. It accepts user web requests, gives out fast files like images, and sends complex tasks to the app server.
+
+### What is the role of the application server?
+
+The app server runs the main logic of the website. It processes the backend code, talks to the database, and creates the active pages for the user.
+
+### What is the role of the database (MySQL)?
+
+MySQL is the digital filing cabinet. It saves important, long-term information like user accounts and profiles in a clean, organized way.
+
+### What does the server use to communicate with the user's computer?
+
+It uses HTTP or HTTPS protocols built on top of TCP/IP network rules. The browser sends a question (Request) and the server sends the page (Response).
+
+### Main System Problems
+
+1. Single Point of Failure (SPOF)
+   Everything is in one place. If the single server breaks down or loses power, the whole website stops working immediately because there is no backup server.
+
+2. Maintenance Downtime
+   When you upload new code or update the database, you must restart the tools. This action takes the website offline and stops users from opening it during the update.
+
+3. Traffic Limits (No Scaling)
+   One machine has limited power (CPU and memory). If too many people visit the site at the same time, the server slows down or crashes because it cannot share the load.
